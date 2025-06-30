@@ -1,100 +1,275 @@
-| **DEPARTAMENTO:** Ciencias de la Computación | **CARRERA:** Ingeniería en Tecnologías de la Información |
-|----------------------------------------------|----------------------------------------------------------|
-| **ASIGNATURA:** Aplicaciones Distribuidas    | **NIVEL:** 7to           | **FECHA:** 28/06/2025     |
-| **DOCENTE:** Ing. Paulo Galarza              | **PRÁCTICA N°:** 1       | **CALIFICACIÓN:**         |
+# INFORME TÉCNICO
+## Laboratorio 2 - API de Gestión de Cursos
 
-**Repositorio GitHub:** [https://github.com/melanymoreira/espe-mongoose.git](https://github.com/melanymoreira/espe-mongoose.git)
-
-# Implementación de una API RESTful con Node.js, Express y MongoDB usando Mongoose
-
-**Nombre del estudiante:**  
-Melany Rosmery Moreira Zambrano
+**DEPARTAMENTO:** Ciencias de la Computación  
+**CARRERA:** Ingeniería en Tecnologías de la Información  
+**ASIGNATURA:** Aplicaciones Distribuidas  
+**NIVEL:** 7mo  
+**DOCENTE:** Ing. Paulo Galarza  
+**ESTUDIANTE:** Juan Carlos Yasig 
+**PRÁCTICA N°:** 2  
+**REPOSITORIO:** https://github.com/juanelocy/U2Lab2_YasigJuan_Distribuidas.git
 
 ---
 
 ## RESUMEN
 
-En esta práctica se desarrolló un sistema de gestión de cursos mediante una API RESTful utilizando Node.js, Express y MongoDB, empleando el ORM Mongoose para la administración eficiente de los datos. El sistema permite crear, consultar, actualizar y eliminar cursos, facilitando la gestión académica. Se estructuró el proyecto siguiendo buenas prácticas de desarrollo, separando modelos, rutas y controladores para mejorar la mantenibilidad. Además, se utilizó Docker para desplegar la base de datos y mongo-express para su administración visual. Las pruebas de los endpoints se realizaron con Postman, comprobando la correcta funcionalidad del sistema. El uso de Mongoose simplificó la interacción con la base de datos, permitiendo validaciones y modelado de datos de manera sencilla. Se concluyó que el uso de un ORM aporta ventajas significativas frente a las consultas nativas, mejorando la productividad y la seguridad del desarrollo.
+Este laboratorio se enfoca en el desarrollo de una aplicación web integral para la gestión de cursos académicos, implementando una arquitectura completa que incluye tanto frontend como backend. La solución desarrollada permite la gestión completa de cursos académicos mediante una API RESTful construida con Node.js, Express y MongoDB, integrada con un frontend desarrollado en React.
 
-**Palabras Claves:** API REST, Mongoose, MongoDB
+La aplicación implementa operaciones CRUD (Create, Read, Update, Delete) completas para la gestión de cursos, incluyendo funcionalidades de autenticación y autorización de usuarios mediante JSON Web Tokens (JWT). El sistema permite a los usuarios registrarse, iniciar sesión, y gestionar cursos de manera segura y eficiente, todo a través de una interfaz moderna y responsiva.
+
+El proyecto demuestra la integración exitosa entre tecnologías frontend y backend, aplicando buenas prácticas de desarrollo como la separación de responsabilidades, manejo de estado, seguridad de datos y documentación técnica completa.
+
+## PALABRAS CLAVE
+
+- **React:** Biblioteca de JavaScript para desarrollo de interfaces de usuario
+- **API RESTful:** Servicio web que sigue principios REST para comunicación entre sistemas
+- **CRUD:** Operaciones de Crear, Leer, Actualizar y Eliminar datos
+- **MongoDB:** Base de datos NoSQL orientada a documentos
+- **JWT:** JSON Web Tokens para autenticación y autorización
+
+## INTRODUCCIÓN
+
+En el contexto actual del desarrollo de aplicaciones web, la arquitectura basada en APIs RESTful se ha convertido en un estándar para la creación de sistemas escalables y mantenibles. La separación entre frontend y backend permite mayor flexibilidad, reutilización de código y facilita el mantenimiento de aplicaciones complejas.
+
+Este laboratorio práctico se desarrolló con el objetivo de consolidar los conocimientos sobre la integración de tecnologías modernas de desarrollo web, específicamente la comunicación entre una aplicación React y una API RESTful. La práctica se centra en el desarrollo de un sistema de gestión de cursos académicos que permita a los usuarios realizar operaciones completas de administración de datos.
+
+El proyecto aborda aspectos fundamentales del desarrollo web moderno, incluyendo la arquitectura de aplicaciones distribuidas, la implementación de servicios HTTP, el manejo de estado en aplicaciones React, y la implementación de sistemas de autenticación seguros. Además, se enfatiza la importancia de aplicar buenas prácticas de desarrollo y documentación técnica.
+
+La elección de las tecnologías utilizadas se basa en su popularidad en la industria, su robustez y la facilidad de integración entre ellas, proporcionando un ambiente de aprendizaje que refleja las prácticas actuales del desarrollo de software.
+
+## OBJETIVOS
+
+### Objetivo General
+Desarrollar una aplicación web completa que integre un frontend en React con una API RESTful para la gestión de cursos académicos, implementando operaciones CRUD y sistemas de autenticación seguros.
+
+### Objetivos Específicos
+
+1. **Consumir APIs RESTful:** Implementar la comunicación entre el frontend React y una API RESTful externa o local, utilizando servicios HTTP para el intercambio de datos.
+2. **Implementar operaciones CRUD:** Desarrollar funcionalidades completas de creación, lectura, actualización y eliminación de registros de cursos en la base de datos.
+4. **Integrar autenticación segura:** Implementar un sistema de autenticación y autorización de usuarios utilizando JSON Web Tokens (JWT) para proteger las rutas sensibles de la aplicación.
+
+
+## MARCO TEÓRICO
+
+### APIs RESTful (Representational State Transfer)
+
+Las APIs RESTful constituyen un estilo arquitectónico para el diseño de servicios web que utiliza los métodos HTTP estándar (GET, POST, PUT, DELETE) para realizar operaciones sobre recursos. Los principios fundamentales de REST incluyen:
+
+- **Stateless (Sin estado):** Cada petición debe contener toda la información necesaria para ser procesada
+- **Cacheable:** Las respuestas deben poder ser almacenadas en caché cuando sea apropiado
+- **Uniform Interface:** Interfaz uniforme entre componentes
+- **Layered System:** Arquitectura en capas que permite escalabilidad
+
+### React.js
+
+React es una biblioteca de JavaScript desarrollada por Facebook para la construcción de interfaces de usuario interactivas y dinámicas. Sus características principales incluyen:
+
+- **Componentes reutilizables:** Encapsulación de lógica y presentación
+- **Virtual DOM:** Representación virtual del DOM para optimización de rendimiento
+- **Unidirectional Data Flow:** Flujo de datos unidireccional para mayor predictibilidad
+- **Hooks:** Funciones que permiten usar estado y otras características de React
+
+### Node.js y Express
+
+Node.js es un entorno de ejecución de JavaScript del lado del servidor que permite desarrollar aplicaciones backend escalables. Express es un framework web minimalista para Node.js que facilita la creación de APIs y aplicaciones web.
+
+### MongoDB
+
+MongoDB es una base de datos NoSQL orientada a documentos que almacena datos en formato BSON (Binary JSON). Sus ventajas incluyen flexibilidad de esquema, escalabilidad horizontal y facilidad de integración con aplicaciones JavaScript.
+
+### JSON Web Tokens (JWT)
+
+JWT es un estándar abierto para la transmisión segura de información entre partes. Se utiliza comúnmente para autenticación y autorización en aplicaciones web, proporcionando un mecanismo stateless para la gestión de sesiones de usuario.
+
+### Operaciones CRUD
+
+Las operaciones CRUD representan las cuatro operaciones básicas que se pueden realizar sobre datos persistentes:
+- **Create (Crear):** Inserción de nuevos registros
+- **Read (Leer):** Consulta de datos existentes
+- **Update (Actualizar):** Modificación de registros existentes
+- **Delete (Eliminar):** Eliminación de registros
+
+## DESCRIPCIÓN DEL PROCEDIMIENTO
+
+### Fase 1: Configuración del Entorno de Desarrollo
+
+1. **Inicialización del proyecto backend:**
+    - Configuración de Node.js y npm
+    - Instalación de dependencias: Express, MongoDB, mongoose, jsonwebtoken, bcryptjs
+    - Configuración de la estructura de carpetas del proyecto
+
+2. **Inicialización del proyecto frontend:**
+    - Creación de aplicación React usando Create React App
+    - Instalación de dependencias: Axios, React Router, librerías de UI
+    - Configuración de la estructura de componentes
+
+### Fase 2: Desarrollo del Backend (API RESTful)
+
+1. **Configuración de la base de datos:**
+    - Conexión a MongoDB local o en la nube
+    - Definición de esquemas de datos para usuarios y cursos
+    - Configuración de modelos con Mongoose
+
+2. **Implementación de endpoints de autenticación:**
+    - Endpoint para registro de usuarios (/api/auth/register)
+    - Endpoint para inicio de sesión (/api/auth/login)
+    - Middleware de autenticación con JWT
+
+3. **Implementación de endpoints CRUD para cursos:**
+    - GET /api/cursos - Listar todos los cursos
+    - GET /api/cursos/:id - Obtener un curso específico
+    - POST /api/cursos - Crear nuevo curso
+    - PUT /api/cursos/:id - Actualizar curso existente
+    - DELETE /api/cursos/:id - Eliminar curso
+
+4. **Configuración de middleware:**
+    - CORS para permitir peticiones desde el frontend
+    - Middleware de autenticación para rutas protegidas
+    - Manejo de errores y validación de datos
+
+### Fase 3: Desarrollo del Frontend (React)
+
+1. **Configuración de servicios HTTP:**
+    - Creación de instancia de Axios configurada
+    - Implementación de interceptores para manejo de tokens
+    - Servicios para operaciones de autenticación y CRUD
+
+2. **Desarrollo de componentes de autenticación:**
+    - Componente de registro de usuarios
+    - Componente de inicio de sesión
+    - Componente de protección de rutas
+
+3. **Desarrollo de componentes de gestión de cursos:**
+    - Componente para listar cursos
+    - Formulario para crear/editar cursos
+    - Componente para eliminar cursos
+    - Componente de detalles de curso
+
+4. **Implementación de navegación:**
+    - Configuración de React Router
+    - Navegación entre diferentes vistas
+    - Manejo de estado global de autenticación
+
+### Fase 4: Integración y Estilización
+
+1. **Integración frontend-backend:**
+    - Conexión de componentes React con endpoints de la API
+    - Manejo de estados de carga y errores
+    - Actualización automática de la interfaz tras operaciones CRUD
+
+2. **Estilización de la aplicación:**
+    - Aplicación de estilos CSS modernos
+    - Diseño responsivo para diferentes dispositivos
+    - Mejora de la experiencia de usuario (UX)
+
+## ANÁLISIS DE RESULTADOS
+
+### Funcionalidad Implementada
+
+La aplicación desarrollada logró implementar exitosamente todas las funcionalidades planificadas:
+
+1. **Sistema de Autenticación:**
+    - Registro de usuarios con validación de datos
+    - Inicio de sesión con generación de tokens JWT
+    - Protección de rutas sensibles mediante middleware de autenticación
+    - Manejo seguro de contraseñas mediante hash bcrypt
+
+2. **Operaciones CRUD de Cursos:**
+    - **Creación:** Los usuarios pueden agregar nuevos cursos con información completa
+    - **Lectura:** Visualización de lista completa de cursos con datos actualizados en tiempo real
+    - **Actualización:** Edición de cursos existentes con persistencia inmediata
+    - **Eliminación:** Remoción de cursos con confirmación de usuario
+
+3. **Integración Frontend-Backend:**
+    - Comunicación fluida entre React y la API RESTful
+    - Manejo eficiente de peticiones HTTP con Axios
+    - Actualización automática de la interfaz tras cambios en los datos
+    - Gestión adecuada de estados de carga y errores
+
+## GRÁFICOS Y FOTOGRAFÍAS
+
+### Capturas de Pantalla de la Aplicación
+
+#### 1. Registro de Usuario
+![Inserción de registro](https://i.imgur.com/NTk7nWg.png)  
+*Figura 1: Interfaz para el registro de nuevos usuarios en el sistema*
+
+
+#### 2. Inicio de Sesión
+![Inserción de registro](https://i.imgur.com/thUXsFE.png)  
+*Figura 1: Sistema de autenticación con credenciales de usuario*
+
+
+#### 4. Formulario de Nuevo Curso
+![Inserción de registro](https://i.imgur.com/NKKMSg0.png)  
+*Figura 1: Interfaz para la creación de cursos*
+
+
+#### 5. Edición de Curso Existente
+![Inserción de registro](https://i.imgur.com/9XfFLJO.png)  
+*Figura 1: Modificación de información de cursos*
+
+
+#### 6. Confirmación de Eliminación
+![Inserción de registro](https://i.imgur.com/4wpQWyO.png)  
+*Figura 1: Eliminacion de curso*
+
+## DISCUSIÓN
+
+### Fortalezas de la Implementación
+
+El desarrollo de este laboratorio ha demostrado varias fortalezas significativas:
+
+1. **Arquitectura Modular:** La separación clara entre frontend y backend facilita el mantenimiento y escalabilidad del sistema. Esta arquitectura permite que cada capa evolucione independientemente.
+
+2. **Seguridad Robusta:** La implementación de JWT para autenticación proporciona un nivel de seguridad adecuado para aplicaciones web modernas, eliminando la necesidad de mantener sesiones en el servidor.
+
+3. **Experiencia de Usuario:** La interfaz desarrollada en React ofrece una experiencia fluida y responsiva, con actualizaciones en tiempo real que mejoran la interacción del usuario.
+
+4. **Escalabilidad:** El uso de MongoDB como base de datos NoSQL permite manejar grandes volúmenes de datos de manera eficiente y facilita la escalabilidad horizontal.
+
+## CONCLUSIONES
+
+1. **Integración Exitosa:** Se logró una integración exitosa entre React y la API RESTful, demostrando la viabilidad de esta arquitectura para aplicaciones web modernas.
+
+1. **Aprendizaje Consolidado:** Esta práctica permitió consolidar conocimientos teóricos mediante su aplicación práctica en un proyecto real.
+
+2. **Comprensión Arquitectónica:** Se desarrolló una comprensión profunda de la arquitectura de aplicaciones web modernas y la comunicación entre capas.
+
+3. **Habilidades Técnicas:** Se fortalecieron habilidades en tecnologías actuales de desarrollo web, aumentando la empleabilidad y competencia técnica.
+
+## BIBLIOGRAFÍA
+
+1. **Documentación Oficial de React**  
+    *React – A JavaScript library for building user interfaces*  
+    Facebook Inc. Consultado en junio de 2025.  
+    Disponible en: https://reactjs.org/docs/getting-started.html
+
+2. **Documentación Oficial de Node.js**  
+    *Node.js Documentation*  
+    Node.js Foundation. Consultado en junio de 2025.  
+    Disponible en: https://nodejs.org/en/docs/
+
+3. **Express.js Official Documentation**  
+    *Express - Node.js web application framework*  
+    Express Team. Consultado en junio de 2025.  
+    Disponible en: https://expressjs.com/
+
+4. **MongoDB Manual**  
+    *MongoDB Documentation*  
+    MongoDB Inc. Consultado en junio de 2025.  
+    Disponible en: https://docs.mongodb.com/
+
+5. **JWT.io - JSON Web Tokens Introduction**  
+    *Introduction to JSON Web Tokens*  
+    Auth0. Consultado en junio de 2025.  
+    Disponible en: https://jwt.io/introduction/
+
+6. **Axios Documentation**  
+    *Promise based HTTP client for the browser and node.js*  
+    Axios Team. Consultado en junio de 2025.  
+    Disponible en: https://axios-http.com/docs/intro
+
 
 ---
-
-## 1. INTRODUCCIÓN
-
-El objetivo de esta práctica fue implementar una API RESTful para la gestión de cursos, aplicando el uso de un ORM (Mongoose) para interactuar con MongoDB. Se enfatizó la importancia de la organización del código y el uso de herramientas modernas como Docker para el despliegue de servicios. La práctica permitió afianzar conocimientos sobre el desarrollo backend y el manejo disciplinado de recursos en el laboratorio.
-
----
-
-## 2. OBJETIVO(S)
-
-2.1 Desarrollar una API RESTful organizada y funcional utilizando Node.js, Express y MongoDB.  
-2.2 Aplicar el uso de Mongoose como ORM para la gestión eficiente de datos.  
-2.3 Desplegar servicios de base de datos y administración usando Docker.
-
----
-
-## 3. MARCO TEÓRICO
-
-Un ORM (Object Relational Mapping) como Mongoose permite mapear documentos de MongoDB a objetos de JavaScript, facilitando la validación, consulta y manipulación de datos. A diferencia de las consultas nativas, el ORM proporciona abstracción, validación automática y mayor seguridad, reduciendo la posibilidad de errores y mejorando la mantenibilidad del código.
-
----
-
-## 4. DESCRIPCIÓN DEL PROCEDIMIENTO
-
-- Se creó la estructura del proyecto separando modelos, rutas y controladores.
-- Se configuró el archivo `.env` para manejar variables sensibles.
-- Se implementó el archivo `docker-compose.yml` para levantar MongoDB y mongo-express.
-- Se desarrollaron los endpoints CRUD para el recurso "curso".
-- Se realizaron pruebas de los endpoints usando Postman.
-- Se documentó el proceso y los resultados obtenidos.
-
----
-
-## 5. ANÁLISIS DE RESULTADOS
-
-Se logró implementar correctamente la API, verificando el funcionamiento de los endpoints mediante Postman. Los datos se almacenaron y consultaron exitosamente en MongoDB. El uso de Mongoose simplificó la validación y el modelado de los datos, permitiendo un desarrollo más ágil y seguro. Se observó que la estructura modular facilita la escalabilidad y el mantenimiento del proyecto.
-
----
-
-## 6. GRÁFICOS O FOTOGRAFÍAS
-
-A continuación, se presentan capturas de pantalla del funcionamiento del proyecto:
-
-**Creación de un curso en Postman:**  
-![POST /course](src/img/ingresarCurso.png)
-
-**Consulta de cursos en Postman:**  
-![GET /course](src/img/obtenerCurso.png)
-
-**Actualizar cursos en Postman:**  
-![PUT /course](src/img/actualizarCurso.png)
-
-**Eliminar cursos en Postman:**  
-![DELETE /course](src/img/eliminarCurso.png)
-
-**Interfaz de mongo-express:**  
-![mongo-express](src/img/mongo-express.png)
-
----
-
-## 7. DISCUSIÓN
-
-El uso de Mongoose como ORM demostró ser ventajoso frente a las consultas nativas, ya que permite definir esquemas, realizar validaciones y manejar relaciones de manera sencilla. Además, la integración con Docker facilitó el despliegue y la administración de la base de datos. La estructura modular del proyecto contribuyó a una mejor organización y comprensión del código.
-
----
-
-## 8. CONCLUSIONES
-
-- El uso de un ORM como Mongoose agiliza el desarrollo y mejora la calidad del código.
-- Docker simplifica la gestión de servicios y dependencias en el entorno de desarrollo.
-- La organización modular del proyecto facilita su mantenimiento y escalabilidad.
-- Las pruebas con Postman permitieron validar el correcto funcionamiento de la API.
-
----
-
-## 9. BIBLIOGRAFÍA
-
-- MongoDB, Inc. (2024). [MongoDB Manual](https://docs.mongodb.com/). Consulta: 28/06/2025.
-- Express.js Foundation. (2024). [Express Documentation](https://expressjs.com/). Consulta: 28/06/2025.
-- Automattic. (2024). [Mongoose Documentation](https://mongoosejs.com/docs/). Consulta: 28/06/2025.

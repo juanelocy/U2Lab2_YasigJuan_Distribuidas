@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 const courseSchema = new mongoose.Schema({
-  title: String,
-  description: String,
-  numberOfTopics: Number,
-  publishedAt: Date,
+  title: { type: String },
+  description: { type: String },
+  numberOfTopics: { type: Number },
+  publishedAt: { type: Date }
 });
 
 module.exports = mongoose.model("Course", courseSchema);
